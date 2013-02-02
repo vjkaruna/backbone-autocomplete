@@ -1,15 +1,25 @@
 backbone-autocomplete
 =====================
 
+TODO
+
+* sections
+* special syntax
+* form submit
+* documentation
+
 A progressively enhanced autocomplete field powered by backbone.js and underscore.js
 
 ## Overview
 
 html:
 
-    <form action="/search">
-      <input type="text" class="autocomplete">
-    </form>
+    <div class="autocomplete">
+      <form action="/search">
+        <input type="text" placeholder="Search...">
+        <ul class="autocomplete-results" style="display: none"></ul>
+      </form>
+    </div>
 
 coffee:
 
@@ -21,7 +31,7 @@ coffee:
 
 ### Required
 
-* `el`: input element. usually a `type=text` field.
+* `el`: an input[type=text] field
 * TODO how to handle input data and/or callback for autocomplete results
 * TODO how to handle special syntax: #, @, [], "", ''
 
@@ -31,7 +41,7 @@ coffee:
 
 ## Properties
 
-* `el`: the input field element. usually [type=text].
+* `el`: the input[type=text] field element
 
 ## Methods
 
