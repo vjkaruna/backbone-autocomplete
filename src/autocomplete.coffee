@@ -2,6 +2,9 @@ class AutocompleteItem extends Backbone.Model
   key: ->
     'name'
 
+  kind: ->
+    @get('kind')
+
   matches: (regexp) ->
     regexp.test(@get(@key()))
 
@@ -40,8 +43,8 @@ class AutocompleteItemsView extends Backbone.View
     'blur input[type=text]'               : 'hideResults'
 
     # TODO why can't i use hover and click?
-    'mouseenter .autocomplete-results > *': '_selectResult'
-    'mousedown .autocomplete-results > *'     : '_finishAutocomplete'
+    'mouseenter [data-autocomplete-completion]': '_selectResult'
+    'mousedown [data-autocomplete-completion]': '_finishAutocomplete'
 
   initialize: ->
     @_$field = @$el.find('input[type=text]')
@@ -86,10 +89,19 @@ class AutocompleteItemsView extends Backbone.View
           $first = $items.filter(':first-child')
           $last = $items.filter(':last-child')
           $selected = $items.filter('.selected')
-          $el = if e.which is 38
-            if $selected.is(':first-child') then $last else $selected.prev()
-          else
-            if $selected.is(':last-child') then $first else $selected.next()
+
+          $el =
+            if e.which is 38
+              if $selected.is(':first-child')
+                $last
+              else
+                $selected.prevAll('[data-autocomplete-completion]').filter(':eq(0)')
+            else
+              if $selected.is(':last-child')
+                $first
+              else
+                $selected.nextAll('[data-autocomplete-completion]').filter(':eq(0)')
+
           @selectResult($items.index($el))
         when 27 # escape
           @hideResults()
@@ -114,12 +126,16 @@ class AutocompleteItemsView extends Backbone.View
 
       # we want an "all results" link as the first autocomplete result
       # TODO we shouldn't actually use markup here... right?
-      @_$resultsList.append('<li><a href="#">See all results</a></li>')
+      @_$resultsList.append('<li data-autocomplete-completion="#"><a href="#">See all results</a></li>')
 
-      # iterate over matching autocomplete items, rendering them
-      _.each @collection.matches(regexp), (item) =>
-        v = new AutocompleteItemView(model: item)
-        @_$resultsList.append(v.render(regexp).$el)
+      # group autocomplete results by kind. then iterate over those
+      # groups, rendering each item.
+      groups =_.groupBy(@collection.matches(regexp), (item) -> item.kind())
+      _.each groups, (matches, kind) =>
+        @_$resultsList.append("<li><h5>#{kind}</h5></li>")
+        _.each matches, (item) =>
+          v = new AutocompleteItemView(model: item)
+          @_$resultsList.append(v.render(regexp).$el)
 
       # automatically select the first autocomplete item
       @_$resultsList.show().children(':first-child').addClass('selected')

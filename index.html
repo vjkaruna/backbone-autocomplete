@@ -35,7 +35,20 @@
     $(document).ready(function() {
       $('input[type=text]').focus()
 
-      c = new AutocompleteItems([ {name: 'apple'}, {name: 'orange'}, {name: 'pear'}, {name: 'BANANA'}])
+      c = new AutocompleteItems([
+        { name: 'wine'          , kind: 'ingredient' } ,
+        { name: 'chocolate'     , kind: 'ingredient' } ,
+        { name: 'hummus'        , kind: 'ingredient' } ,
+        { name: 'cheese'        , kind: 'ingredient' } ,
+        { name: 'mountains'     , kind: 'ingredient' } ,
+        { name: 'oceans'        , kind: 'ingredient' } ,
+        { name: 'monica'        , kind: 'person' }     ,
+        { name: 'piggly'        , kind: 'person' }     ,
+        { name: 'san francisco' , kind: 'place'  }     ,
+        { name: 'cupertino'     , kind: 'place'  }     ,
+        { name: 'palo alto'     , kind: 'place'  }     ,
+        { name: 'san mateo'     , kind: 'place'  }
+      ])
       window.v = new AutocompleteItemsView({
         el: $('.autocomplete'),
         collection: c
