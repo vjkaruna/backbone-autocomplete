@@ -6,7 +6,7 @@ class AutocompleteItem extends Backbone.Model
     'name'
 
   matches: (regexp) ->
-    regexp.test(@get(@key()))
+    regexp.test(@completion())
 
   completion: ->
     @_prefixToken() + @get(@key()) + @_suffixToken()
