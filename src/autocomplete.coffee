@@ -77,6 +77,7 @@ class AutocompleteItemsView extends Backbone.View
     $el = $(e.target)
 
     # TODO kind of a gross hack. why is the event triggering on inner elements?
+    # TODO don't hard code to 'li'
     $el = if $el.is('li') then $el else $el.closest('li')
 
     @selectResult(@_$resultsList.children().index($el))
@@ -90,6 +91,7 @@ class AutocompleteItemsView extends Backbone.View
           $last = $items.filter(':last-child')
           $selected = $items.filter('.selected')
 
+          # TODO is the following the most efficient way to do this?
           $el =
             if e.which is 38
               if $selected.is(':first-child')
@@ -126,12 +128,14 @@ class AutocompleteItemsView extends Backbone.View
 
       # we want an "all results" link as the first autocomplete result
       # TODO we shouldn't actually use markup here... right?
+      # TODO don't hard code to 'li'
       @_$resultsList.append('<li data-autocomplete-completion="#"><a href="#">See all results</a></li>')
 
       # group autocomplete results by kind. then iterate over those
       # groups, rendering each item.
       groups =_.groupBy(@collection.matches(regexp), (item) -> item.kind())
       _.each groups, (matches, kind) =>
+        # TODO don't hard code to 'li'
         @_$resultsList.append("<li><h5>#{kind}</h5></li>")
         _.each matches, (item) =>
           v = new AutocompleteItemView(model: item)
