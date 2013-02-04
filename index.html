@@ -35,7 +35,7 @@
     $(document).ready(function() {
       $('input[type=text]').focus()
 
-      c = new AutocompleteItems([
+      var c = new AutocompleteItems([
         { name: 'wine'          , kind: 'ingredient', token: '#'  } ,
         { name: 'chocolate'     , kind: 'ingredient', token: '#'  } ,
         { name: 'hummus'        , kind: 'ingredient', token: '#'  } ,
@@ -66,7 +66,7 @@
         { name: "*"             , kind: 'weird'     , token: '!'  } ,
         { name: "?questions?"   , kind: 'weird'     , token: '!'  }
       ])
-      window.v = new AutocompleteItemsView({
+      var v = new AutocompleteItemsView({
         el: $('.autocomplete'),
         collection: c
       });
