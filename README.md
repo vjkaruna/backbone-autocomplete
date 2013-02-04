@@ -3,7 +3,6 @@ backbone-autocomplete
 
 TODO
 
-* special syntax
 * form submit
 * unit tests
 * fix TODOS
