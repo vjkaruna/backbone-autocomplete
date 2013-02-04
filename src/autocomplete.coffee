@@ -9,7 +9,9 @@ class AutocompleteItem extends Backbone.Model
     regexp.test(@completion())
 
   completion: ->
-    @_prefixToken() + @get(@key()) + @_suffixToken()
+    s = @get(@key())
+    s = '"' + s + '"' if /\s/.test(s)
+    @_prefixToken() + s + @_suffixToken()
 
   groupBy: ->
     @get('kind')
