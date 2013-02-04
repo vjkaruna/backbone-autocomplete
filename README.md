@@ -6,6 +6,8 @@ TODO
 * sections
 * special syntax
 * form submit
+* unit tests
+* fix TODOS
 * documentation
 
 A progressively enhanced autocomplete field powered by backbone.js and underscore.js
