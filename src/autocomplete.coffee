@@ -2,7 +2,7 @@ class AutocompleteItem extends Backbone.Model
   key: ->
     'name'
 
-  kind: ->
+  groupBy: ->
     @get('kind')
 
   matches: (regexp) ->
@@ -133,10 +133,10 @@ class AutocompleteItemsView extends Backbone.View
 
       # group autocomplete results by kind. then iterate over those
       # groups, rendering each item.
-      groups =_.groupBy(@collection.matches(regexp), (item) -> item.kind())
-      _.each groups, (matches, kind) =>
+      groups =_.groupBy(@collection.matches(regexp), (item) -> item.groupBy())
+      _.each groups, (matches, group) =>
         # TODO don't hard code to 'li'
-        @_$resultsList.append("<li><h5>#{kind}</h5></li>")
+        @_$resultsList.append("<li><h5>#{group}</h5></li>")
         _.each matches, (item) =>
           v = new AutocompleteItemView(model: item)
           @_$resultsList.append(v.render(regexp).$el)
