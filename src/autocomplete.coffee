@@ -20,10 +20,10 @@ class AutocompleteItem extends Backbone.Model
     @get('token')
 
   _prefixToken: ->
-    @token().slice(0, 1)
+    @token()?.slice(0, 1) || ''
 
   _suffixToken: ->
-    @token().slice(1, 2)
+    @token()?.slice(1, 2) || ''
 
 class AutocompleteItems extends Backbone.Collection
   model: AutocompleteItem
