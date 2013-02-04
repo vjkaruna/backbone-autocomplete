@@ -33,16 +33,7 @@ coffee:
 ### Required
 
 * `el`: an input[type=text] field
-* TODO how to handle input data and/or callback for autocomplete results
-* TODO how to handle special syntax: #, @, [], "", ''
-
-### Optional
-
-* `template`: a function that takes an autocomplete item and renders html.
-
-## Properties
-
-* `el`: the input[type=text] field element
+* `collection`: a AutocompleteItems collection
 
 ## Methods
 
@@ -50,22 +41,18 @@ coffee:
 
   * submits the parent form. if needed, finishes autocomplete from selected
     result
-  * triggers `autocomplete:submit`
 
 * `showResults()`
 
   * shows autocomplete results
-  * triggers `autocomplete:show_results`
 
 * `hideResults()`
 
   * hides autocomplete results
-  * triggers `autocomplete:hide_results`
 
 * `selectResult(index = 0)`
 
   * selects the autocomplete item at the given index. does not submit the form.
-  * triggers `autocomplete:select_result`
 
 ## Behavior
 
