@@ -1,3 +1,6 @@
+# RegExp.escape via http://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript/3561711#3561711
+RegExp.escape = (s) -> s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
+
 class AutocompleteItem extends Backbone.Model
   key: ->
     'name'
@@ -136,7 +139,7 @@ class AutocompleteItemsView extends Backbone.View
 
       # a regexp to match autocomplete items
       # TODO we probably need to escape regexp characters from fragment
-      regexp = new RegExp("(#{fragment})", 'i')
+      regexp = new RegExp("(#{RegExp.escape(fragment)})", 'i')
 
       # we want an "all results" link as the first autocomplete result
       # TODO we shouldn't actually use markup here... right?

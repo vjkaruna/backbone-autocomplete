@@ -36,18 +36,34 @@
       $('input[type=text]').focus()
 
       c = new AutocompleteItems([
-        { name: 'wine'          , kind: 'ingredient' } ,
-        { name: 'chocolate'     , kind: 'ingredient' } ,
-        { name: 'hummus'        , kind: 'ingredient' } ,
-        { name: 'cheese'        , kind: 'ingredient' } ,
-        { name: 'mountains'     , kind: 'ingredient' } ,
-        { name: 'oceans'        , kind: 'ingredient' } ,
-        { name: 'monica'        , kind: 'person' }     ,
-        { name: 'piggly'        , kind: 'person' }     ,
-        { name: 'san francisco' , kind: 'place'  }     ,
-        { name: 'cupertino'     , kind: 'place'  }     ,
-        { name: 'palo alto'     , kind: 'place'  }     ,
-        { name: 'san mateo'     , kind: 'place'  }
+        { name: 'wine'          , kind: 'ingredient', token: '#'  } ,
+        { name: 'chocolate'     , kind: 'ingredient', token: '#'  } ,
+        { name: 'hummus'        , kind: 'ingredient', token: '#'  } ,
+        { name: 'cheese'        , kind: 'ingredient', token: '#'  } ,
+        { name: 'mountains'     , kind: 'ingredient', token: '#'  } ,
+        { name: 'oceans'        , kind: 'ingredient', token: '#'  } ,
+        { name: 'down time'     , kind: 'ingredient', token: '#'  } ,
+
+        { name: 'monica'        , kind: 'person'    , token: '@'  } ,
+        { name: 'piggly'        , kind: 'person'    , token: '@'  } ,
+
+        { name: 'san francisco' , kind: 'place'     , token: '[]' } ,
+        { name: 'cupertino'     , kind: 'place'     , token: '[]' } ,
+        { name: 'palo alto'     , kind: 'place'     , token: '[]' } ,
+        { name: 'san mateo'     , kind: 'place'     , token: '[]' } ,
+
+        // special characters
+        { name: '"double'       , kind: 'weird'     , token: '!'  } ,
+        { name: '"another"'     , kind: 'weird'     , token: '!'  } ,
+        { name: "'single"       , kind: 'weird'     , token: '!'  } ,
+        { name: "'another'"     , kind: 'weird'     , token: '!'  } ,
+        { name: "(O_o)"         , kind: 'weird'     , token: '!'  } ,
+        { name: "{O_o}"         , kind: 'weird'     , token: '!'  } ,
+        { name: "[O_o]"         , kind: 'weird'     , token: '!'  } ,
+        { name: "$$$"           , kind: 'weird'     , token: '!'  } ,
+        { name: "^_^"           , kind: 'weird'     , token: '!'  } ,
+        { name: "with.a.dot"    , kind: 'weird'     , token: '!'  } ,
+        { name: "*"             , kind: 'weird'     , token: '!'  }
       ])
       window.v = new AutocompleteItemsView({
         el: $('.autocomplete'),
