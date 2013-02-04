@@ -8,6 +8,7 @@ TODO
 * unit tests
 * fix TODOS
 * documentation
+* organize code/files properly
 
 A progressively enhanced autocomplete field powered by backbone.js and underscore.js
 
