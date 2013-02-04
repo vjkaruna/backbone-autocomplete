@@ -2,11 +2,23 @@ class AutocompleteItem extends Backbone.Model
   key: ->
     'name'
 
+  matches: (regexp) ->
+    regexp.test(@get(@key()))
+
+  completion: ->
+    @_prefixToken() + @get(@key()) + @_suffixToken()
+
   groupBy: ->
     @get('kind')
 
-  matches: (regexp) ->
-    regexp.test(@get(@key()))
+  token: ->
+    @get('token')
+
+  _prefixToken: ->
+    @token().slice(0, 1)
+
+  _suffixToken: ->
+    @token().slice(1, 2)
 
 class AutocompleteItems extends Backbone.Collection
   model: AutocompleteItem
@@ -33,7 +45,7 @@ class AutocompleteItemView extends Backbone.View
     else
       json[@model.key()]
     @$el.html(@template(json))
-    @$el.attr('data-autocomplete-completion', @model.get(@model.key()))
+    @$el.attr('data-autocomplete-completion', encodeURIComponent(@model.completion()))
     @
 
 class AutocompleteItemsView extends Backbone.View
@@ -110,7 +122,7 @@ class AutocompleteItemsView extends Backbone.View
         when 13 # enter
           @_finishAutocomplete()
         else
-          @_showAutocompleteResults(e)
+          @_showAutocompleteResults()
 
     @_debouncedHandleKeypress(e)
 
@@ -146,7 +158,7 @@ class AutocompleteItemsView extends Backbone.View
 
   _finishAutocomplete: ->
     # the completion of the autocomplete item selected by the user
-    completion = @_$resultsList.children('.selected').attr('data-autocomplete-completion')
+    completion = decodeURIComponent(@_$resultsList.children('.selected').attr('data-autocomplete-completion'))
 
     # update the input field by replacing the last field fragment with the
     # full completion
