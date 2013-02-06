@@ -3,6 +3,7 @@ backbone-autocomplete
 
 TODO
 
+* api to change autocomplete input field
 * form submit
 * unit tests
 * fix TODOS
@@ -24,15 +25,22 @@ html:
 coffee:
 
     document.ready ->
+      c = new AutocompleteItems [
+        { name: 'apple'   , kind: 'fruit'    , token: '#' },
+        { name: 'orange'  , kind: 'fruit'    , token: '#' },
+        { name: 'carrot'  , kind: 'vegetable', token: '@' },
+        { name: 'broccoli', kind: 'vegetable', token: '@' },
+      ]
       v = new AutocompleteView
         el: $('input.autocomplete')
+        collection: c
 
 ## Options
 
 ### Required
 
-* `el`: an input[type=text] field
-* `collection`: a AutocompleteItems collection
+* `el`: an element containing a `input[type=text]` field
+* `collection`: a `AutocompleteItems` collection
 
 ## Methods
 
