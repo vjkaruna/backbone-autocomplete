@@ -127,6 +127,9 @@ class AutocompleteItemsView extends Backbone.View
 
   #### Public
 
+  # optionally override this with subclasses of AutocompleteItemView
+  itemView: AutocompleteItemView
+
   # events to which autocomplete responds to
   events:
     # keying into the input field
@@ -279,7 +282,7 @@ class AutocompleteItemsView extends Backbone.View
           # TODO if we want to keep it simple and optimize for speed, maybe
           # we should not use a Backbone.View here and instead just have
           # this view do the rendering. Discuss.
-          v = new AutocompleteItemView(model: item)
+          v = new @itemView(model: item)
           @_$resultsList.append(v.render(regexp).$el)
 
       # show the autocomplete results

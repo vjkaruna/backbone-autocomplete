@@ -42,6 +42,10 @@ coffee:
 * `el`: an element containing a `input[type=text]` field
 * `collection`: a `AutocompleteItems` collection
 
+#### Optional
+
+* `itemView`: a subclass of `AutocompleteItem` if you need custom behavior
+
 ## Methods
 
 * `submit()`
