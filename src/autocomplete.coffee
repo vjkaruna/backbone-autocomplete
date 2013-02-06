@@ -188,7 +188,7 @@ class AutocompleteItemsView extends Backbone.View
 
   #### Private
 
-  # selects an autocomplete result from a given event (usually a mousedown)
+  # selects an autocomplete result from a given event (usually a mouseenter)
   _selectResult: (e) ->
     $el = $(e.target)
 
