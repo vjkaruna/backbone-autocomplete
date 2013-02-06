@@ -4,7 +4,6 @@ backbone-autocomplete
 TODO
 
 * api to change autocomplete input field
-* form submit
 * unit tests
 * fix TODOS
 * organize code/files properly

@@ -18,10 +18,10 @@
 
   <body>
     <div class="autocomplete">
-      <!-- form action="/" -->
+      <form action="/" onsubmit="return fakeSubmit()">
         <input type="text" placeholder="Search...">
         <ul class="autocomplete-results" style="display: none"></ul>
-      <!-- /form -->
+      </form>
     </div>
   </body>
 
@@ -32,6 +32,11 @@
   <script src="lib/autocomplete.js"></script>
 
   <script>
+    function fakeSubmit() {
+      console.log('fake submit');
+      return false;
+    };
+
     $(document).ready(function() {
       $('input[type=text]').focus()
 
@@ -71,7 +76,7 @@
         { name: 'panda' },
         { name: 'bear'  }
       ])
-      var v = new AutocompleteItemsView({
+      var v = window.v = new AutocompleteItemsView({
         el: $('.autocomplete'),
         collection: c
       });

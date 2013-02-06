@@ -147,7 +147,7 @@ class AutocompleteItemsView extends Backbone.View
 
     # clicking on an autocomplete result finishes autocompleting
     # TODO why can't i use the `click` event?
-    'mousedown [data-autocomplete-completion]' : '_finishAutocomplete'
+    'mousedown [data-autocomplete-completion]' : 'submit'
 
   # initializes the autocomplete, and caches a few DOM elements for use later.
   # NOTE you must initialize this view with @$el already attached to the DOM.
@@ -163,8 +163,11 @@ class AutocompleteItemsView extends Backbone.View
     # return @ per Backbone.View convention
     @
 
-  # hides autocomplete results, blurs the input field, and submits the form
+  # finishes autocomplete, hides results, blurs the input, and submits the form
   submit: ->
+    # finish autocomplete
+    @_finishAutocomplete()
+
     # hide autocomplete results
     @hideResults()
 
@@ -242,7 +245,17 @@ class AutocompleteItemsView extends Backbone.View
 
         # enter key finishes autocomplete and submits
         when 13
+          # NOTE do not use `@finish()` here because the enter key is
+          # already submitting the form. using `@finish()` would mistakenly
+          # submit twice.
           @_finishAutocomplete()
+          @hideResults()
+          @_$field.blur()
+
+          # prevent event bubbling if someone's pressing enter on the input
+          # field -- usually this means we're submitting the form containing
+          # the input field.
+          false
 
         # else, show matching autocomplete results
         else
@@ -292,7 +305,7 @@ class AutocompleteItemsView extends Backbone.View
       @selectResult()
 
   # finishes the autocomplete by replacing the typed-in fragment with the
-  # full completion in the input field, then calls `submit()`
+  # full completion in the input field
   _finishAutocomplete: ->
     # the completion of the autocomplete item selected by the user
     completion = decodeURIComponent(@_$resultsList.children('.selected').attr('data-autocomplete-completion'))
@@ -302,9 +315,6 @@ class AutocompleteItemsView extends Backbone.View
     unless _.isEmpty(completion)
       fragments = @_fieldFragments().slice(0, -1).concat(completion)
       @_$field.val(fragments.join(' '))
-
-    # hide autocomplete results and submit the parent form
-    @submit()
 
   # split the input field's text into separate fragments
   _fieldFragments: ->
