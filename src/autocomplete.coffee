@@ -281,7 +281,7 @@ class AutocompleteItemsView extends Backbone.View
 
     # show autocomplete results if the field is non-empty
     # NOTE assume that we're always only autocompleting the *last* fragment
-    if (fragment = _.last(@_fieldFragments())).length > 0
+    if (fragment = _.last(@_fragments(@_$field.val()))).length > 0
 
       # a regexp to match autocomplete items
       regexp = new RegExp("(#{RegExp.escape(fragment)})", 'i')
@@ -324,13 +324,12 @@ class AutocompleteItemsView extends Backbone.View
     # field fragment with the full completion
     if not _.isEmpty(completion) and completion isnt '#'
       # new fragments
-      fragments = @_fieldFragments().slice(0, -1).concat(completion)
+      fragments = @_fragments(@_$field.val()).slice(0, -1).concat(completion)
 
       # update the field
-      @_$field.val(@_fieldFragments(fragments.join(' ')).join(' '))
+      @_$field.val(@_fragments(fragments.join(' ')).join(' '))
 
   # split the input field's text into separate fragments
-  _fieldFragments: (s) ->
-    s ||= @_$field.val()
+  _fragments: (s) ->
     # TODO using /\s+/ doesn't account for quoted multi-word items... maybe OK?
     _.uniq(s.split(/\s+/))
