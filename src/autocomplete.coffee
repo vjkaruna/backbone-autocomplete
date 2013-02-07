@@ -134,6 +134,7 @@ class AutocompleteItemsView extends Backbone.View
 
   # events to which autocomplete responds to
   events:
+    # submitting the form
     'submit form'                              : '_handleSubmit'
 
     # keying into the input field
