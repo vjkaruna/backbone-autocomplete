@@ -319,7 +319,7 @@ class AutocompleteItemsView extends Backbone.View
 
     # if there's a completion, update the input field by replacing the last
     # field fragment with the full completion
-    unless _.isEmpty(completion)
+    if not _.isEmpty(completion) and completion isnt '#'
       fragments = @_fieldFragments().slice(0, -1).concat(completion)
       @_$field.val(fragments.join(' '))
 
