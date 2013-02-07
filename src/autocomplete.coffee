@@ -132,6 +132,8 @@ class AutocompleteItemsView extends Backbone.View
 
   # events to which autocomplete responds to
   events:
+    'submit form'                              : '_handleSubmit'
+
     # keying into the input field
     'keyup input[type=text]'                   : '_handleKeypress'
 
@@ -163,6 +165,21 @@ class AutocompleteItemsView extends Backbone.View
     # return @ per Backbone.View convention
     @
 
+  # this is a little tricky, but essentially it only submits the form after
+  # giving it enough time to properly populate the input field.
+  # TODO this method is kind of a gross hack. better way?
+  _handleSubmit: (e, force = false) ->
+    if force
+      # submit the form if we really, really want to do so
+      return true
+    else
+      # re-trigger the submit after a small amount of time so autocomplete
+      # finishes populating the form.
+      _.delay((=> @_$form.trigger('submit', true)), 100)
+
+      # return false to prevent form submit
+      false
+
   # finishes autocomplete, hides results, blurs the input, and submits the form
   submit: ->
     # finish autocomplete
@@ -175,7 +192,7 @@ class AutocompleteItemsView extends Backbone.View
     @_$field.blur()
 
     # submit the form
-    @_$form.submit()
+    @_handleSubmit(true)
 
   # shows autocomplete results that match text inside the input field
   showResults: ->
@@ -245,17 +262,7 @@ class AutocompleteItemsView extends Backbone.View
 
         # enter key finishes autocomplete and submits
         when 13
-          # NOTE do not use `@finish()` here because the enter key is
-          # already submitting the form. using `@finish()` would mistakenly
-          # submit twice.
-          @_finishAutocomplete()
-          @hideResults()
-          @_$field.blur()
-
-          # prevent event bubbling if someone's pressing enter on the input
-          # field -- usually this means we're submitting the form containing
-          # the input field.
-          false
+          @submit()
 
         # else, show matching autocomplete results
         else

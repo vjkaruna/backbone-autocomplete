@@ -18,7 +18,7 @@
 
   <body>
     <div class="autocomplete">
-      <form action="/" onsubmit="return fakeSubmit()">
+      <form action="/">
         <input type="text" placeholder="Search...">
         <ul class="autocomplete-results" style="display: none"></ul>
       </form>
@@ -32,11 +32,6 @@
   <script src="lib/autocomplete.js"></script>
 
   <script>
-    function fakeSubmit() {
-      console.log('submit: ' + $('.autocomplete input').val());
-      return false;
-    };
-
     $(document).ready(function() {
       $('input[type=text]').focus()
 
