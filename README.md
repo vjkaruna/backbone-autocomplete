@@ -43,7 +43,7 @@ coffee:
 
 #### Optional
 
-* `itemView`: a subclass of `AutocompleteItem` if you need custom behavior
+* `itemView`: a subclass of `AutocompleteItemView` if you need custom behavior
 
 ## Methods
 
