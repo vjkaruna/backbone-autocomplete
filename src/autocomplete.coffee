@@ -108,7 +108,9 @@ class AutocompleteItemView extends Backbone.View
 
     # update @$el's html
     @$el.html(@template(json))
-    @$el.attr('data-autocomplete-completion', encodeURIComponent(@model.completion()))
+
+    completion = encodeURIComponent(@model.completion())
+    @$el.attr('data-autocomplete-completion', completion)
 
     # return @ per Backbone.View convention
     @
@@ -154,6 +156,7 @@ class AutocompleteItemsView extends Backbone.View
   # initializes the autocomplete, and caches a few DOM elements for use later.
   # NOTE you must initialize this view with @$el already attached to the DOM.
   initialize: ->
+    @itemView = @options.itemView if @options.itemView
     @_$field = @$el.find('input[type=text]')
     @_$form = @$el.find('form')
     @_$resultsList = @$el.find('.autocomplete-results')
