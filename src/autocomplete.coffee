@@ -323,10 +323,14 @@ class AutocompleteItemsView extends Backbone.View
     # if there's a completion, update the input field by replacing the last
     # field fragment with the full completion
     if not _.isEmpty(completion) and completion isnt '#'
+      # new fragments
       fragments = @_fieldFragments().slice(0, -1).concat(completion)
-      @_$field.val(fragments.join(' '))
+
+      # update the field
+      @_$field.val(@_fieldFragments(fragments.join(' ')).join(' '))
 
   # split the input field's text into separate fragments
-  _fieldFragments: ->
+  _fieldFragments: (s) ->
+    s ||= @_$field.val()
     # TODO using /\s+/ doesn't account for quoted multi-word items... maybe OK?
-    @_$field.val().split(/\s+/)
+    _.uniq(s.split(/\s+/))
