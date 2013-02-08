@@ -6,7 +6,8 @@ TODO
 * api to change autocomplete input field
 * unit tests
 * fix TODOS
-* organize code/files properly
+* organize code properly - methods don't work unless `bare` is run on coffee's build
+* update docs to better explain how to use each method
 
 A progressively enhanced autocomplete field powered by backbone.js and underscore.js
 
