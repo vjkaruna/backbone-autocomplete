@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <style>
+      .autocomplete-results {
+        border: 1px solid red;
+      }
+      .autocomplete-results > * {
+        border: 1px solid green;
+      }
+      .autocomplete-results > .selected {
+        font-weight: bold;
+      }
+      .autocomplete-results a {
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="autocomplete">
+      <form action="/">
+        <input type="text" placeholder="Search...">
+        <ul class="autocomplete-results" style="display: none"></ul>
+      </form>
+    </div>
+
+    <script src="../vendor/js/jquery-1.9.0.min.js"></script>
+    <script src="../vendor/js/underscore-min.js"></script>
+    <script src="../vendor/js/backbone-min.js"></script>
+
+    <script src="../lib/autocomplete.js"></script>
+    <script src="example.js"></script>
+  </body>
+</html>
