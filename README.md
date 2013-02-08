@@ -73,3 +73,14 @@ coffee:
 * select an autocomplete result with mouse click or enter keypress
   * selecting also submits the form containing the autocomplete field
 * after submit, the field blurs and autocomplete results are hidden
+
+## Docs
+
+### Dependencies: Coffeescript & Docco
+You'll need Coffeescript to build the docs
+
+    npm install -g coffee-script docco
+
+### Build
+
+    cake docs
