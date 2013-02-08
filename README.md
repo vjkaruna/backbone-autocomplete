@@ -74,13 +74,23 @@ coffee:
   * selecting also submits the form containing the autocomplete field
 * after submit, the field blurs and autocomplete results are hidden
 
-## Docs
+## Building
+You'll need Coffeescript to build
 
-### Dependencies: Coffeescript & Docco
-You'll need Coffeescript to build the docs
+    npm install -g coffee-script
 
-    npm install -g coffee-script docco
+### Source
+This will generate a `.js` from the source
 
-### Build
+    cake build
+
+### Docs
+
+#### Dependencies: Coffeescript & Docco
+You'll also need docco to build the docs
+
+    npm install -g docco
+
+#### Building
 
     cake docs
