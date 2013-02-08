@@ -1,0 +1,12 @@
+.autocomplete-results {
+  border: 1px solid red;
+}
+.autocomplete-results > * {
+  border: 1px solid green;
+}
+.autocomplete-results > .selected {
+  font-weight: bold;
+}
+.autocomplete-results a {
+  display: block;
+}
