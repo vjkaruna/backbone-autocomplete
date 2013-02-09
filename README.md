@@ -6,7 +6,6 @@ TODO
 * api to change autocomplete input field
 * unit tests
 * fix TODOS
-* organize code properly - methods don't work unless `bare` is run on coffee's build
 * update docs to better explain how to use each method
 * add package.json
 
