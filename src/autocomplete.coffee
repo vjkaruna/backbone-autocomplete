@@ -10,7 +10,7 @@ RegExp.escape = (s) -> s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
 # NOTE: recommended to be extended into another class
 #
 
-class AutocompleteItem extends Backbone.Model
+class @.AutocompleteItem extends Backbone.Model
 
   #### Public
 
@@ -51,7 +51,7 @@ class AutocompleteItem extends Backbone.Model
 # NOTE: does not have to be extended, but can be
 #
 
-class AutocompleteItems extends Backbone.Collection
+class @.AutocompleteItems extends Backbone.Collection
 
   #### Public
 
@@ -76,7 +76,7 @@ class AutocompleteItems extends Backbone.Collection
 # NOTE: does not have to be extended, but can be
 #
 
-class AutocompleteItemView extends Backbone.View
+class @.AutocompleteItemView extends Backbone.View
 
   #### Public
 
@@ -125,7 +125,7 @@ class AutocompleteItemView extends Backbone.View
 # NOTE: does not have to be extended, but can be
 #
 
-class AutocompleteItemsView extends Backbone.View
+class @.AutocompleteItemsView extends Backbone.View
 
   #### Public
 
