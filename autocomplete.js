@@ -126,12 +126,26 @@
     };
 
     AutocompleteItemsView.prototype.initialize = function() {
+      var _this = this;
       if (this.options.itemView) {
         this.itemView = this.options.itemView;
       }
       this._$field = this.$el.find('input[type=text]');
       this._$form = this.$el.find('form');
-      return this._$resultsList = this.$el.find('.autocomplete-results');
+      this._$resultsList = this.$el.find('.autocomplete-results');
+      this.on('autocomplete:clear', function() {
+        return _this._$field.val('');
+      });
+      this.on('autocomplete:replace', function(value) {
+        var fragments;
+        fragments = _this._fragments(value);
+        return _this._$field.val(fragments.join(' '));
+      });
+      return this.on('autocomplete:append', function(value) {
+        var fragments;
+        fragments = _this._fragments(_this._$field.val()).concat(value);
+        return _this._$field.val(_this._fragments(fragments.join(' ')).join(' '));
+      });
     };
 
     AutocompleteItemsView.prototype.render = function() {

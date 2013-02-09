@@ -162,6 +162,20 @@ class @.AutocompleteItemsView extends Backbone.View
     @_$form = @$el.find('form')
     @_$resultsList = @$el.find('.autocomplete-results')
 
+    # listens for autocomplete:clear to clear the input field
+    @on 'autocomplete:clear', =>
+      @_$field.val('')
+
+    # listens for autocomplete:replace to replace contents of the input field
+    @on 'autocomplete:replace', (value) =>
+      fragments = @_fragments(value)
+      @_$field.val(fragments.join(' '))
+
+    # listens for autocomplete:replace to append to contents of the input field
+    @on 'autocomplete:append', (value) =>
+      fragments = @_fragments(@_$field.val()).concat(value)
+      @_$field.val(@_fragments(fragments.join(' ')).join(' '))
+
   # render is a no-op because we require the DOM to already contain the
   # needed markup.
   # TODO discuss. should we have this class render markup completely?
