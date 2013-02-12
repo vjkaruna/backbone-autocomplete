@@ -10,7 +10,7 @@ RegExp.escape = (s) -> s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
 # NOTE: recommended to be extended into another class
 #
 
-class AutocompleteItem extends Backbone.Model
+class @.AutocompleteItem extends Backbone.Model
 
   #### Public
 
@@ -51,7 +51,7 @@ class AutocompleteItem extends Backbone.Model
 # NOTE: does not have to be extended, but can be
 #
 
-class AutocompleteItems extends Backbone.Collection
+class @.AutocompleteItems extends Backbone.Collection
 
   #### Public
 
@@ -76,7 +76,7 @@ class AutocompleteItems extends Backbone.Collection
 # NOTE: does not have to be extended, but can be
 #
 
-class AutocompleteItemView extends Backbone.View
+class @.AutocompleteItemView extends Backbone.View
 
   #### Public
 
@@ -125,7 +125,7 @@ class AutocompleteItemView extends Backbone.View
 # NOTE: does not have to be extended, but can be
 #
 
-class AutocompleteItemsView extends Backbone.View
+class @.AutocompleteItemsView extends Backbone.View
 
   #### Public
 
@@ -161,6 +161,20 @@ class AutocompleteItemsView extends Backbone.View
     @_$field = @$el.find('input[type=text]')
     @_$form = @$el.find('form')
     @_$resultsList = @$el.find('.autocomplete-results')
+
+    # listens for autocomplete:clear to clear the input field
+    @on 'autocomplete:clear', =>
+      @_$field.val('')
+
+    # listens for autocomplete:replace to replace contents of the input field
+    @on 'autocomplete:replace', (value) =>
+      fragments = @_fragments(value)
+      @_$field.val(fragments.join(' '))
+
+    # listens for autocomplete:replace to append to contents of the input field
+    @on 'autocomplete:append', (value) =>
+      fragments = @_fragments(@_$field.val()).concat(value)
+      @_$field.val(@_fragments(fragments.join(' ')).join(' '))
 
   # render is a no-op because we require the DOM to already contain the
   # needed markup.
