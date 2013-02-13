@@ -82,6 +82,7 @@ class @.AutocompleteItemView extends Backbone.View
 
   # autocomplete items are li elements
   tagName: 'li'
+  className: 'autocomplete-item'
 
   # initialize
   initialize: ->
@@ -315,13 +316,14 @@ class @.AutocompleteItemsView extends Backbone.View
         @_$resultsList.append("<li><h5>#{group}</h5></li>")
 
         # iterate over matching results, rendering them to the DOM
-        _.each matches, (item) =>
+        _.each matches, (item, i) =>
 
           # TODO if we want to keep it simple and optimize for speed, maybe
           # we should not use a Backbone.View here and instead just have
           # this view do the rendering. Discuss.
           v = new @itemView(model: item)
-          @_$resultsList.append(v.render(regexp).$el)
+          $el = v.render(regexp).$el.addClass("index-#{i}")
+          @_$resultsList.append($el)
 
       # show the autocomplete results
       @_$resultsList.show()
