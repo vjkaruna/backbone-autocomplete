@@ -139,12 +139,12 @@
       this.on('autocomplete:replace', function(value) {
         var fragments;
         fragments = _this._fragments(value);
-        return _this._$field.val(fragments.join(' '));
+        return _this._$field.val(fragments.join(' ').trim() + ' ');
       });
       return this.on('autocomplete:append', function(value) {
         var fragments;
         fragments = _this._fragments(_this._$field.val()).concat(value);
-        return _this._$field.val(_this._fragments(fragments.join(' ')).join(' '));
+        return _this._$field.val(_this._fragments(fragments.join(' ')).join(' ').trim() + ' ');
       });
     };
 
@@ -250,7 +250,7 @@
       completion = decodeURIComponent(this._$resultsList.children('.selected').attr('data-autocomplete-completion'));
       if (!_.isEmpty(completion) && completion !== '#') {
         fragments = this._fragments(this._$field.val()).slice(0, -1).concat(completion);
-        return this._$field.val(this._fragments(fragments.join(' ')).join(' '));
+        return this._$field.val(this._fragments(fragments.join(' ')).join(' ').trim() + ' ');
       }
     };
 
