@@ -228,12 +228,12 @@
       this.hideResults();
       if ((fragment = _.last(this._fragments(this._$field.val()))).length > 0) {
         regexp = new RegExp("(" + (RegExp.escape(fragment)) + ")", 'i');
-        this._$resultsList.append('<li data-autocomplete-completion="#"><a href="#">See all results</a></li>');
+        this._$resultsList.append('<li class="autocomplete-item-all" data-autocomplete-completion="#"><a href="#">See all results</a></li>');
         groups = _.groupBy(this.collection.matches(regexp), function(item) {
           return item.groupBy();
         });
         _.each(groups, function(matches, group) {
-          _this._$resultsList.append("<li><h5>" + group + "</h5></li>");
+          _this._$resultsList.append("<li class=\"autocomplete-item-group\"><h5>" + group + "</h5></li>");
           return _.each(matches, function(item, i) {
             var $el, v;
             v = new _this.itemView({
