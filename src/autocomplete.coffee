@@ -305,7 +305,7 @@ class @.AutocompleteItemsView extends Backbone.View
       # we want an "all results" link as the first autocomplete result
       # TODO we shouldn't actually use markup here... right?
       # TODO don't hard code to 'li'
-      @_$resultsList.append('<li data-autocomplete-completion="#"><a href="#">See all results</a></li>')
+      @_$resultsList.append('<li class="autocomplete-item-all" data-autocomplete-completion="#"><a href="#">See all results</a></li>')
 
       # group autocomplete results
       groups =_.groupBy(@collection.matches(regexp), (item) -> item.groupBy())
@@ -313,7 +313,7 @@ class @.AutocompleteItemsView extends Backbone.View
       # render grouped autocomplete results to the DOM
       _.each groups, (matches, group) =>
         # TODO don't hard code to 'li'
-        @_$resultsList.append("<li><h5>#{group}</h5></li>")
+        @_$resultsList.append("<li class=\"autocomplete-item-group\"><h5>#{group}</h5></li>")
 
         # iterate over matching results, rendering them to the DOM
         _.each matches, (item, i) =>
