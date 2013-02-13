@@ -7,6 +7,19 @@
 .autocomplete-results > .selected {
   font-weight: bold;
 }
+.autocomplete-results .autocomplete-item {
+  display: none;
+}
+.autocomplete-results .autocomplete-item.index-0,
+.autocomplete-results .autocomplete-item.index-1,
+.autocomplete-results .autocomplete-item.index-2,
+.autocomplete-results .autocomplete-item.index-3,
+.autocomplete-results .autocomplete-item.index-4,
+.autocomplete-results .autocomplete-item.index-5,
+.autocomplete-results .autocomplete-item.index-6,
+.autocomplete-results .autocomplete-item.index-7 {
+  display: block;
+}
 .autocomplete-results a {
   display: block;
 }
