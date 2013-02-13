@@ -169,12 +169,12 @@ class @.AutocompleteItemsView extends Backbone.View
     # listens for autocomplete:replace to replace contents of the input field
     @on 'autocomplete:replace', (value) =>
       fragments = @_fragments(value)
-      @_$field.val(fragments.join(' '))
+      @_$field.val(fragments.join(' ').trim() + ' ')
 
     # listens for autocomplete:replace to append to contents of the input field
     @on 'autocomplete:append', (value) =>
       fragments = @_fragments(@_$field.val()).concat(value)
-      @_$field.val(@_fragments(fragments.join(' ')).join(' '))
+      @_$field.val(@_fragments(fragments.join(' ')).join(' ').trim() + ' ')
 
   # render is a no-op because we require the DOM to already contain the
   # needed markup.
@@ -342,7 +342,7 @@ class @.AutocompleteItemsView extends Backbone.View
       fragments = @_fragments(@_$field.val()).slice(0, -1).concat(completion)
 
       # update the field
-      @_$field.val(@_fragments(fragments.join(' ')).join(' '))
+      @_$field.val(@_fragments(fragments.join(' ')).join(' ').trim() + ' ')
 
   # split the input field's text into separate fragments
   _fragments: (s) ->
