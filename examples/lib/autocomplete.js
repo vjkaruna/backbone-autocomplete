@@ -83,6 +83,8 @@ this.AutocompleteItemView = (function(_super) {
 
   AutocompleteItemView.prototype.tagName = 'li';
 
+  AutocompleteItemView.prototype.className = 'autocomplete-item';
+
   AutocompleteItemView.prototype.initialize = function() {
     return this.model.on('change', this.render);
   };
@@ -231,12 +233,13 @@ this.AutocompleteItemsView = (function(_super) {
       });
       _.each(groups, function(matches, group) {
         _this._$resultsList.append("<li><h5>" + group + "</h5></li>");
-        return _.each(matches, function(item) {
-          var v;
+        return _.each(matches, function(item, i) {
+          var $el, v;
           v = new _this.itemView({
             model: item
           });
-          return _this._$resultsList.append(v.render(regexp).$el);
+          $el = v.render(regexp).$el.addClass("index-" + i);
+          return _this._$resultsList.append($el);
         });
       });
       this._$resultsList.show();
