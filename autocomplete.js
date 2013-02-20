@@ -258,7 +258,7 @@
     };
 
     AutocompleteItemsView.prototype._fragments = function(s) {
-      return _.uniq(s.split(/\s+/));
+      return _.uniq(s.trim().split(/\s+/));
     };
 
     return AutocompleteItemsView;
