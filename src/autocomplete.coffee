@@ -349,4 +349,4 @@ class @.AutocompleteItemsView extends Backbone.View
   # split the input field's text into separate fragments
   _fragments: (s) ->
     # TODO using /\s+/ doesn't account for quoted multi-word items... maybe OK?
-    _.uniq(s.split(/\s+/))
+    _.uniq(s.trim().split(/\s+/))
