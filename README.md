@@ -31,9 +31,10 @@ coffee:
         { name: 'carrot'  , kind: 'vegetable', token: '@' },
         { name: 'broccoli', kind: 'vegetable', token: '@' },
       ]
-      v = new AutocompleteView
-        el: $('input.autocomplete')
+      v = new AutocompleteItemsView(
+        el: $('.autocomplete')
         collection: c
+      )
 
 ## Options
 
