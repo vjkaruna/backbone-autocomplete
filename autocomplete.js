@@ -250,7 +250,10 @@
 
     AutocompleteItemsView.prototype._finishAutocomplete = function() {
       var completion, fragments;
-      completion = decodeURIComponent(this._$resultsList.children('.selected').attr('data-autocomplete-completion'));
+      completion = this._$resultsList.children('.selected').attr('data-autocomplete-completion');
+      if (completion) {
+        completion = decodeURIComponent(completion);
+      }
       if (!_.isEmpty(completion) && completion !== '#') {
         fragments = this._fragments(this._$field.val()).slice(0, -1).concat(completion);
         return this._$field.val(this._fragments(fragments.join(' ')).join(' ').trim() + ' ');
