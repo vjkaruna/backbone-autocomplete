@@ -335,7 +335,8 @@ class @.AutocompleteItemsView extends Backbone.View
   # full completion in the input field
   _finishAutocomplete: ->
     # the completion of the autocomplete item selected by the user
-    completion = decodeURIComponent(@_$resultsList.children('.selected').attr('data-autocomplete-completion'))
+    completion = @_$resultsList.children('.selected').attr('data-autocomplete-completion')
+    completion = decodeURIComponent(completion) if completion
 
     # if there's a completion, update the input field by replacing the last
     # field fragment with the full completion
