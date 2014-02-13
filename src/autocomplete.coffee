@@ -158,7 +158,6 @@ class @.AutocompleteItemsView extends Backbone.View
   # initializes the autocomplete, and caches a few DOM elements for use later.
   # NOTE you must initialize this view with @$el already attached to the DOM.
   initialize: ->
-    @itemView = @options.itemView if @options.itemView
     @_$field = @$el.find('input[type=text]')
     @_$form = @$el.find('form')
     @_$resultsList = @$el.find('.autocomplete-results')
